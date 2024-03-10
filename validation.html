@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validation</title>
+    <style>
+        .formdesign{
+            font-size: 20px;
+        }
+        .formdesign input{
+            width: 50%;
+            padding: 12px 20px;
+            border: 1px solid blue;
+            margin: 14px;
+            border-radius: 4px;
+            font-size: 15px;
+        }
+        .formerror{
+            color: red;
+        }
+        .button{
+            height: 50px;
+            width: 100px;
+            padding: 12px 8px;
+            border-radius: 2rem;
+            border: none;
+            background-color: rgba(165, 42, 42, 0.904);
+            color: beige;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>Registration form</h2>
+    <form action="/najid.java" name="myform" onsubmit="return validate()" method="post">
+        <div class="formdesign" id="name">
+            Name: <input type="text" name="fname" required><b><span class="formerror"></span></b>
+        </div>
+        <div class="formdesign" id="email">
+            Email: <input type="email" name="femail" required><b><span class="formerror"></span></b>
+        </div>
+        <div class="formdesign" id="phone">
+            phone number: <input type="number" name="fphone" required><b><span class="formerror"></span></b>
+        </div>
+        <div class="formdesign" id="password">
+            Password: <input type="password" name="fpassword"required><b><span class="formerror"></span></b>
+        </div>
+        <div class="formdesign" id="cpassword">
+            confirm password: <input type="password" name="cpassword"required><b><span class="formerror"></span></b>
+        </div>
+        <input type="submit" class="button" value="submit">
+    </form>
+</body>
+<script>
+    function seterror(id,error){
+        elementt=document.getElementById(id);
+        elementt.getElementsByClassName('formerror')[0].innerHTML=error;
+    }
+    function validate(){
+        var returnval=true
+        var name=document.forms['myform']["fname"].value;
+        if(name.length<5){
+            seterror("name","*length is too short");
+            returnval=false;
+        }
+        var email=document.forms['myform']["femail"].value;
+        if(email.length>20){
+            seterror("email","*length is too long");
+            returnval=false;
+        }
+        var phone=document.forms['myform']["fphone"].value;
+        if(phone.length!=10){
+            seterror("phone","*phone number should be 10 degits");
+            returnval=false;
+        }
+        var Password=document.forms['myform']["fpassword"].value;
+        var secondPassword=document.forms['myform']["cpassword"].value;
+        if(secondPassword!==Password){
+            seterror("cpassword","*password should be same");
+            returnval=false;
+        }
+        return returnval;
+    }
+</script>
+
+</html>
